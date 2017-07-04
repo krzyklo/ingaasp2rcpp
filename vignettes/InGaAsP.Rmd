@@ -1,0 +1,89 @@
+---
+title: "InGaAsP calculator"
+author: "Krzysztof Kłos"  
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{InGaAsP calculator}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+### Introduction
+Ultra fast Internet in XXI century is largely based on semiconductor lasers, detectors and modulators (Photonics Integrated Circuits) that are grown in the epitaxy process on InP substrates.  
+There are two main materials systems used to fabricate advanced semiconductor devices on InP:
+
+- InGaAsP quaternary
+- AlInGaAs quaternary
+
+This document will be devoted to the first one - InGaAsP. Band structure and optical properties of the InGaAsP material depend on it's composition - molar fractions of 4 binary materials that InGaAsP is composded of:
+
+- InP
+- GaAs
+- InAs
+- GaP
+
+Usually molar fractions are depicted with equation: $In_{1-x}Ga_xAs_yP_{1-y}$, and the abbreviation commonly used is Phosphide Quaternary (PQ).
+Composition of grown PQ layers are assesed from measurements of Photoluminescence (PL), and from X-Ray Diffractometry (XRD).  
+PL allow to obtain bandgap Eg in eV.  
+XRD allow to get strain/mismatch.  
+
+Device designers define InGaAsP bandgap Eg and strain that they would like to achieve in particular layer. Epitaxy engineers translate target Eg and strain into molar fractions x and y (Eg,Str->x,y), and then use data about solid vs vapor relations from calibration runs or growth model to set reagent flows in epitaxy reactor.  After epitaxy the resulting layers are measured with PL and XRD to evaluate how close to target the outcome of the process is.  Too big deviation results in second iteration of epitaxy to get the outcome closer to target.  
+
+The model implemented in this software is based on paper:  
+`J. Minch, S.H. Park, T. Keating, and S.L. Chuang: "Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers" from Journal of Quantum Electronic vol 35, NO. 5, May 1999`
+
+###Reproducible Research
+The equations, tables, and figures from this paper allows to reproduce and verify implementation of the relation between (Eg, Str <-> x,y) in R/C++ programming language.  
+This model was implemented using R and Rcpp package, which allows to merge speed of the C++ with the power of R.  
+Rcpp allows to use mature, and advanced C++ libraries such as Boost, Armadillo. 
+In the package bisection for root finding algorithm was implemented from the Boost C++ library.  
+To facilitate reproducibility and easiness of colaboration/dissemination the model was written as R's package, with TestThat package for unit testing, and Roxygen2 for supporting good documentation of the code.  
+Final test of the model was to overlay it on the dataseries digitized from the paper.
+
+### Figures
+
+```{r, echo= FALSE, fig.width=7, fig.height=4, fig.show='hold', fig.cap = "Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. Reproduced from Fig. 1 b) of the reference paper"}
+library("myfirstpackage")
+par(mar=c(3,3,1.5,0))
+plot(fig1b$x,fig1b$y10,t="p",xlim=c(-0.02,0.02),ylim=c(0.4,1.4),main="InGaAsP, calculated overlaid on digitized") #x=0..1, y=1
+grid()
+lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),1)) #x=0..1, y=1
+points(fig1b$x,fig1b$x01,col="blue") #x=0.1, y=0..1
+lines(myfirstpackage::modPQ_EgStrain(0.1,seq(0,1,0.05)),col="blue") #x=0.1, y=0..1
+points(fig1b$x,fig1b$x0,col="magenta")
+lines(myfirstpackage::modPQ_EgStrain(0,seq(0,1,0.05)),col="magenta") #x=0, y=0..1
+points(fig1b$x,fig1b$y0,col="brown")
+lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),0),col="brown") #x=0..1, y=0
+points(fig1b$x,fig1b$y07,col="green")
+lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),0.7),col="green") #x=0..1, y=0.7
+points(fig1b$x,fig1b$y09,col="orange")
+lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),0.9),col="orange") #x=0..1, y=0.9
+legend("topleft",col=c("black","blue","magenta","brown","green","orange"),
+       lty=1,
+       legend=c("x=0..1 y=1","x=0.1  y=0..1","x=0     y=0..1","x=0..1 y=0","x=0..1 y=0.7","x=0..1 y=0.9"),
+       lwd=1.5,cex=0.9,bty="n")
+ 
+title(xlab="Strain [absolute units]",ylab="Eg [eV]", line=2, cex.lab=1.1, family="Calibri Light")
+
+```
+
+
+
+```{r, echo= FALSE, fig.width=7, fig.height=4, fig.show='hold', fig.cap = "Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper"}
+
+par(mar=c(3,3,1.5,0))
+plot(fig1a$x,fig1a$Eg01,t="p",xlim=c(0,1),ylim=c(0,1),main="InGaAsP, calculated overlaid on digitized")
+grid()
+points(fig1a$x,fig1a$Str0,col="blue") # 0% strain line, y=ax+b - linear relation between them to get 0
+lines(modPQ_XY_EgStrain(seq(0.72,1.35,0.05),0),col="red",lwd=2)
+lines(modPQ_XY_EgStrain(seq(0.72,1.35,0.05),0.005),col="orange",lwd=1.5) #0.5% strain line
+lines(modPQ_XY_EgStrain(seq(0.705,1.2,0.05),-0.005),col="red",lwd=1.5) #-0.5% strain line
+
+points(fig1a$x,fig1a$Str0,col="blue") # 0 strain line, y=ax+b - linear relation between them to get 0 strain
+points(fig1a$x,fig1a$Eg4,col="brown") # 
+points(fig1a$x,fig1a$Eg02,col="yellow") # 
+lines(modPQ_XY_EgStrain(1.3,seq(0,0.055,0.001)),col="green",lwd=1.5) #constant Eg=1.3eV, nonlinear function
+lines(modPQ_XY_EgStrain(1,seq(-0.01,0.035,0.001)),col="green",lwd=1.5) #constant Eg=1eV, nonlinear relation in X, Y coordinates
+lines(modPQ_XY_EgStrain(1.2,seq(-0.003,0.045,0.001)),col="green",lwd=1.5) #constant Eg=1.2eV,
+
+```
