@@ -1,5 +1,5 @@
 
-#library(myfirstpackage)
+#library(ingaasp2rcpp)
 #context("Bisection")
 
 #TODO correct, this was the tests of bisection written in R

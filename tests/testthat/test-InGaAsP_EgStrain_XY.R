@@ -1,4 +1,4 @@
-library(myfirstpackage)
+library(ingaasp2rcpp)
 context("InGaAsP bandgap without strain")
 
 test_that("Eg InP", {

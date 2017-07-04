@@ -43,21 +43,21 @@ Final test of the model was to overlay it on the dataseries digitized from the p
 ### Figures
 
 ```{r, echo= FALSE, fig.width=7, fig.height=4, fig.show='hold', fig.cap = "Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. Reproduced from Fig. 1 b) of the reference paper"}
-library("myfirstpackage")
+library("ingaasp2rcpp")
 par(mar=c(3,3,1.5,0))
 plot(fig1b$x,fig1b$y10,t="p",xlim=c(-0.02,0.02),ylim=c(0.4,1.4),main="InGaAsP, calculated overlaid on digitized") #x=0..1, y=1
 grid()
-lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),1)) #x=0..1, y=1
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),1)) #x=0..1, y=1
 points(fig1b$x,fig1b$x01,col="blue") #x=0.1, y=0..1
-lines(myfirstpackage::modPQ_EgStrain(0.1,seq(0,1,0.05)),col="blue") #x=0.1, y=0..1
+lines(ingaasp2rcpp::modPQ_EgStrain(0.1,seq(0,1,0.05)),col="blue") #x=0.1, y=0..1
 points(fig1b$x,fig1b$x0,col="magenta")
-lines(myfirstpackage::modPQ_EgStrain(0,seq(0,1,0.05)),col="magenta") #x=0, y=0..1
+lines(ingaasp2rcpp::modPQ_EgStrain(0,seq(0,1,0.05)),col="magenta") #x=0, y=0..1
 points(fig1b$x,fig1b$y0,col="brown")
-lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),0),col="brown") #x=0..1, y=0
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),0),col="brown") #x=0..1, y=0
 points(fig1b$x,fig1b$y07,col="green")
-lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),0.7),col="green") #x=0..1, y=0.7
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),0.7),col="green") #x=0..1, y=0.7
 points(fig1b$x,fig1b$y09,col="orange")
-lines(myfirstpackage::modPQ_EgStrain(seq(0,1,0.05),0.9),col="orange") #x=0..1, y=0.9
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),0.9),col="orange") #x=0..1, y=0.9
 legend("topleft",col=c("black","blue","magenta","brown","green","orange"),
        lty=1,
        legend=c("x=0..1 y=1","x=0.1  y=0..1","x=0     y=0..1","x=0..1 y=0","x=0..1 y=0.7","x=0..1 y=0.9"),
