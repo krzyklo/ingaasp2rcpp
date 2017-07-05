@@ -6,6 +6,11 @@
 \usage{
 eps_xy_f1(x, y)
 }
+\arguments{
+\item{x}{Ga molar fraction}
+
+\item{y}{As molar fraction}
+}
 \description{
 Function use interpolation PQ_interp_a0
 }

@@ -2,10 +2,16 @@
 % Please edit documentation in R/RcppExports.R
 \name{PQ_X_EgStrain}
 \alias{PQ_X_EgStrain}
-\title{function}
+\title{Main function for Eg,Strain -> X,Y}
 \usage{
 PQ_X_EgStrain(Eg, eps_xy)
 }
+\arguments{
+\item{Eg}{bandgap in eV units}
+
+\item{eps_xy}{in-plain strain in absolute units}
+}
 \description{
-details
+Function sets 2 global variables Eg2match and PQ_eps_xy, which are then used by func4root.
+func4root is passed to bisect routine from Boost
 }

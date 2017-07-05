@@ -6,6 +6,11 @@
 \usage{
 PQ_Eg_XY(x, y)
 }
+\arguments{
+\item{x}{Ga molar fraction}
+
+\item{y}{As molar fraction}
+}
 \description{
 Function checks whether light holes or heavy holes gives smaller bandgap
 }

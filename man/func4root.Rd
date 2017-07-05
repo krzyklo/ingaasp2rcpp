@@ -2,10 +2,14 @@
 % Please edit documentation in R/RcppExports.R
 \name{func4root}
 \alias{func4root}
-\title{function}
+\title{Function for which we want to find roots}
 \usage{
 func4root(x)
 }
+\arguments{
+\item{x}{Ga molar fraction}
+}
 \description{
-details
+Function used with function PQ_X_EgStrain tp find root,
+which would give us X Ga molar fraction
 }

@@ -2,10 +2,16 @@
 % Please edit documentation in R/RcppExports.R
 \name{PQ_Y_XStrain}
 \alias{PQ_Y_XStrain}
-\title{function}
+\title{Calculation of Y from arguments X and Strain using transformed eq. 1}
 \usage{
 PQ_Y_XStrain(x, eps_xy)
 }
+\arguments{
+\item{x}{Ga molar fraction}
+
+\item{eps_xy}{Strain in plane of material in absolute units}
+}
 \description{
-details
+We have given eps_xy which we could use to obtain PQ_lattice const.
+Then plugging into eq. 1 we will be able to get Y when we have X given.
 }
