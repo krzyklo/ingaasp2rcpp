@@ -15,6 +15,7 @@ cnst
 This table is reproduced from Tab. 1 in reference paper.
 }
 \examples{
+data("cnst")
 cnst
 }
 \references{

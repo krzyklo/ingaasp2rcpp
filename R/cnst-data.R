@@ -14,5 +14,6 @@
 #' @source J.Minch, S.H. Park, T. Keating and S.L. Chuang: IEEE JQE vol. 35 no. 5, 1999
 #'
 #' @examples
+#' data("cnst")
 #' cnst
 "cnst"

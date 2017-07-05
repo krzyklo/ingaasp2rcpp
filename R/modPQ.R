@@ -1,4 +1,13 @@
 
+#' Transform vectors of PL in nm into Eg in eV
+#'
+#'
+#'@param PL Ga molar fraction
+#'@export
+modPQ_PL2Eg<-function(PL) {
+  mapply( function(a) {ingaasp2rcpp::PL2Eg_f1(a)}, PL )
+}
+
 #'Data.frame for plotting Eg vs Strain for InGaAsP
 #'
 #'Combining output of eps_xy and PQ_Eg_XY functions

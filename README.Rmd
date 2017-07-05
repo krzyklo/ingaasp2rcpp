@@ -1,0 +1,92 @@
+---
+title: "README"
+author: "Krzysztof Kłos"
+date: "July 5, 2017"
+output: 
+  html_document: 
+    keep_md: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+[![Build Status](https://travis-ci.org/krzyklo/ingaasp2rcpp.svg?branch=master)](https://travis-ci.org/krzyklo/ingaasp2rcpp)
+
+### Intro
+This is the R package with model of bandgap(Eg) and strain in InGaAsP material based on paper:  
+**J. Minch, S.H. Park, T. Keating, and S.L. Chuang: "Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers" from Journal of Quantum Electronic vol 35, NO. 5, May 1999**
+
+The model allows to transform Eg, Strain into molar fractions x(Ga), and y(As) and back:  
+$Eg,Strain <--> x,y$
+It was also used to exercise good coding practices in R:
+
+- creating R packages
+- documenting with Roxygen2 package
+- writing unit tests with TestThat package
+- using Rcpp for speed of C++
+- using Boost C++ library
+- writing R markdown documents
+- continous integration principle with GitHub and Travis(Linux only)
+
+### Installation
+Type the commands below in R or RStudio, you could omit devtools if you already have it. 
+
+`install.packages("devtools")`
+
+`devtools::install_github("krzyklo/ingaasp2rcpp")`
+
+The package location on GitHub: <https://github.com/krzyklo/ingaasp2rcpp>.
+
+### Figures
+The figures below shows digitized data (circles) and **InGaAsP calculator** results (lines) for $Eg,Strain <--> x,y$ transformations in both directions.
+
+```{r, echo= FALSE, fig.width=7, fig.height=4, fig.show='hold', fig.cap = "Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. Reproduced from Fig. 1 b) of the reference paper"}
+library("ingaasp2rcpp")
+data("fig1b")
+par(mar=c(3,3,1.5,0))
+plot(fig1b$x,fig1b$y10,t="p",xlim=c(-0.02,0.02),ylim=c(0.4,1.4),main="InGaAsP, calculated overlaid on digitized") #x=0..1, y=1
+grid()
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),1)) #x=0..1, y=1
+points(fig1b$x,fig1b$x01,col="blue") #x=0.1, y=0..1
+lines(ingaasp2rcpp::modPQ_EgStrain(0.1,seq(0,1,0.05)),col="blue") #x=0.1, y=0..1
+points(fig1b$x,fig1b$x0,col="magenta")
+lines(ingaasp2rcpp::modPQ_EgStrain(0,seq(0,1,0.05)),col="magenta") #x=0, y=0..1
+points(fig1b$x,fig1b$y0,col="brown")
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),0),col="brown") #x=0..1, y=0
+points(fig1b$x,fig1b$y07,col="green")
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),0.7),col="green") #x=0..1, y=0.7
+points(fig1b$x,fig1b$y09,col="orange")
+lines(ingaasp2rcpp::modPQ_EgStrain(seq(0,1,0.05),0.9),col="orange") #x=0..1, y=0.9
+legend("topleft",col=c("black","blue","magenta","brown","green","orange"),
+       lty=1,
+       legend=c("x=0..1 y=1","x=0.1  y=0..1","x=0     y=0..1","x=0..1 y=0","x=0..1 y=0.7","x=0..1 y=0.9"),
+       lwd=1.5,cex=0.9,bty="n")
+ 
+title(xlab="Strain [absolute units]",ylab="Eg [eV]", line=2, cex.lab=1.1, family="Calibri Light")
+
+```
+
+```{r, echo= FALSE, fig.width=7, fig.height=4, fig.show='hold', fig.cap = "Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper"}
+
+data("fig1a")
+par(mar=c(3,3,1.5,0))
+plot(fig1a$x,fig1a$Eg01,t="p",xlim=c(0,1),ylim=c(0,1),main="InGaAsP, calculated overlaid on digitized")
+grid()
+points(fig1a$x,fig1a$Str0,col="blue") # 0% strain line, y=ax+b - linear relation between them to get 0
+lines(modPQ_XY_EgStrain(seq(0.72,1.35,0.05),0),col="red",lwd=2)
+lines(modPQ_XY_EgStrain(seq(0.72,1.35,0.05),0.005),col="orange",lwd=1.5) #0.5% strain line
+lines(modPQ_XY_EgStrain(seq(0.705,1.2,0.05),-0.005),col="red",lwd=1.5) #-0.5% strain line
+
+points(fig1a$x,fig1a$Str0,col="blue") # 0 strain line, y=ax+b - linear relation between them to get 0 strain
+points(fig1a$x,fig1a$Eg4,col="brown") # 
+points(fig1a$x,fig1a$Eg02,col="yellow") # 
+lines(modPQ_XY_EgStrain(1.3,seq(0,0.055,0.001)),col="black",lwd=1.5) #constant Eg=1.3eV, nonlinear function
+lines(modPQ_XY_EgStrain(1,seq(-0.01,0.035,0.001)),col="green",lwd=1.5) #constant Eg=1eV, nonlinear relation in X, Y coordinates
+lines(modPQ_XY_EgStrain(1.2,seq(-0.003,0.045,0.001)),col="green",lwd=1.5) #constant Eg=1.2eV,
+legend("topleft",col=c("black","yellow","magenta","brown","green","orange"),
+       lty=1,
+       legend=c("Eg=1.3eV","Eg=","x=0     y=0..1","x=0..1 y=0","x=0..1 y=0.7","x=0..1 y=0.9"),
+       lwd=1.5,cex=0.9,bty="n")
+```
+

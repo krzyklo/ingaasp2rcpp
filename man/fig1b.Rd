@@ -16,6 +16,7 @@ Relation between InGaAsP bandgap and strain for composition x,y digitized from F
 Data was digitized using Engauge Digitizer from Fig. 1(b) to compare against R functions
 }
 \examples{
+data("fig1b")
 head(fig1b)
 }
 \references{
