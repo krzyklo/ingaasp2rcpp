@@ -8,14 +8,14 @@
 #' @param x Ga molar fraction
 #'
 #' @param y As molar fraction
-#' 
+#'
 #'@export
 eps_xy_f1 <- function(x, y) {
     .Call('ingaasp2rcpp_eps_xy_f1', PACKAGE = 'ingaasp2rcpp', x, y)
 }
 
 #' Unstrained bandgap Eg in eV from polynomial eq.3
-#' 
+#'
 #' Strain effects are not included, Eg in eV from polynomial eq.3
 #'
 #' @param x Ga molar fraction
@@ -43,7 +43,7 @@ PQ_Eg_XY <- function(x, y) {
 #' details tbd
 #'
 #' @param eps_xy Strain in plane of material in absolute units
-#' 
+#'
 #' @return Lattice constant in nm units
 #' @export
 LatticeConst <- function(eps_xy) {
@@ -51,7 +51,7 @@ LatticeConst <- function(eps_xy) {
 }
 
 #' Calculation of Y from arguments X and Strain using transformed eq. 1
-#' 
+#'
 #' We have given eps_xy which we could use to obtain PQ_lattice const.
 #' Then plugging into eq. 1 we will be able to get Y when we have X given.
 #'
@@ -63,8 +63,8 @@ PQ_Y_XStrain <- function(x, eps_xy) {
     .Call('ingaasp2rcpp_PQ_Y_XStrain', PACKAGE = 'ingaasp2rcpp', x, eps_xy)
 }
 
-#' Function for which we want to find roots 
-#' 
+#' Function for which we want to find roots
+#'
 #' Function used with function PQ_X_EgStrain tp find root,
 #' which would give us X Ga molar fraction
 #'
@@ -76,13 +76,13 @@ func4root <- function(x) {
 }
 
 #' Main function for Eg,Strain -> X,Y
-#' 
+#'
 #' Function sets 2 global variables Eg2match and PQ_eps_xy, which are then used by func4root.
 #' func4root is passed to bisect routine from Boost
 #'
 #' @param Eg bandgap in eV units
-#' 
-#' @param eps_xy in-plain strain in absolute units 
+#'
+#' @param eps_xy in-plain strain in absolute units
 #'
 #' @export
 PQ_X_EgStrain <- function(Eg, eps_xy) {
@@ -111,5 +111,20 @@ PL2Eg_f1 <- function(PL) {
 #' @export
 Eg2PL_f1 <- function(Eg) {
     .Call('ingaasp2rcpp_Eg2PL_f1', PACKAGE = 'ingaasp2rcpp', Eg)
+}
+
+#' Finding X molar fraction from Y molar fraction and Strain
+#'
+#' Solving interpolation function from eq.1
+#' a0 lattice constant of compound calculated from strain, and given y molar fraction
+#' allows to find X molar fraction of compound.
+#' Usually used to find eg. lattice matched InGaAs composition Y=1, and strain=0
+#'
+#' @param  y As molar fraction
+#' @param strain Strain in absolute units
+#' @return double, x (Ga) molar fraction
+#' @export
+PQ_X_YStrain <- function(y, strain) {
+    .Call('ingaasp2rcpp_PQ_X_YStrain', PACKAGE = 'ingaasp2rcpp', y, strain)
 }
 

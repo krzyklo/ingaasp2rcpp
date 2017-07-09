@@ -1,6 +1,11 @@
-# README
-Krzysztof Kłos  
-July 5, 2017  
+---
+title: "README"
+author: "Krzysztof Kłos"
+date: "July 5, 2017"
+output: 
+  html_document: 
+    keep_md: yes
+---
 
 
 
@@ -35,7 +40,7 @@ The package location on GitHub: <https://github.com/krzyklo/ingaasp2rcpp>.
 ### Figures
 The figures below shows digitized data (circles) and **InGaAsP calculator** results (lines) for $Eg,Strain <-> x,y$ transformations in both directions. As we could see below the model accurately reproduces the data from the figures in reference paper. 
 
-![Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. With circles data reproduced from Fig. 1 b) of the reference paper](README_files/figure-html/unnamed-chunk-1-1.png)
+![Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. With circles data reproduced from Fig. 1 b) of the reference paper](figure/unnamed-chunk-1-1.png)
 
 The plot above shows the relation between bandgap Eg and strain of various InGaAsP composition variants. 
 It was created by fixing x or y molar fractions, and then vary the other molar fraction between 0 and 1.
@@ -53,11 +58,11 @@ round(PQ_Eg_XY(x,1),digits = 2)
 ## [1] 0.73
 ```
 
-![Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper](README_files/figure-html/unnamed-chunk-3-1.png)
+![Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper](figure/unnamed-chunk-3-1.png)
 
 
 In the plot above we could see, two types of x and y relation. First for the cases where strain was fixed, and Eg was varied. The second where Eg was fixed, and strain varied. It need to be noted, that this plot is less straightforward to generate, as not all combinations of Eg and strain values have physical meaning (x and y values smaller than 1).
-An example is Eg=0.7eV, and 0 strain. This pair is leading to y composition larger than 1.076 > 1.
+An example is Eg=0.7eV, and 0 strain. This pair is leading to y composition larger than 1.
 
 ```r
 round(modPQ_XY_EgStrain(0.7,0),3)

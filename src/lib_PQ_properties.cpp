@@ -4,7 +4,7 @@ using namespace Rcpp;
 #include <stdlib.h>
 #include <math.h>
 #include <boost/math/tools/roots.hpp>
-#include "constants.h"
+#include "constants.h" //all the model coefficients put as global variables in this header
 
 namespace tools = boost::math::tools;
 
@@ -16,7 +16,7 @@ namespace tools = boost::math::tools;
 //' @param x Ga molar fraction
 //'
 //' @param y As molar fraction
-//' 
+//'
 //'@export
 // [[Rcpp::export]]
 double eps_xy_f1 (double x,double y);
@@ -67,7 +67,7 @@ double dElh_f1(double x, double y) {
 }
 
 //' Unstrained bandgap Eg in eV from polynomial eq.3
-//' 
+//'
 //' Strain effects are not included, Eg in eV from polynomial eq.3
 //'
 //' @param x Ga molar fraction
@@ -136,22 +136,23 @@ double PQ_Eg_XY(double x, double y) {
 	//Ga = x
 	//As = y
 	double Eclh=PQ_Eclh_f1(x,y);
-	double Echh=PQ_Echh_f1(x,y);  
+	double Echh=PQ_Echh_f1(x,y);
 	if(Eclh<=Echh) {
 		return(Eclh);
 	}
 	else {
-		return(Echh);    
+		return(Echh);
 	}
 }
-
+//*****************************************************
 // Inverted calcs from Eg,Strain to X,Y
+//*****************************************************
 //'lattice constant from eps_xy and for InP substrate
 //'
 //' details tbd
 //'
 //' @param eps_xy Strain in plane of material in absolute units
-//' 
+//'
 //' @return Lattice constant in nm units
 //' @export
 // [[Rcpp::export]]
@@ -160,7 +161,7 @@ double LatticeConst(double eps_xy){
 }
 
 //' Calculation of Y from arguments X and Strain using transformed eq. 1
-//' 
+//'
 //' We have given eps_xy which we could use to obtain PQ_lattice const.
 //' Then plugging into eq. 1 we will be able to get Y when we have X given.
 //'
@@ -176,12 +177,12 @@ double PQ_Y_XStrain(double x, double eps_xy) {
 }
 
 //*********global variable***********
-double Eg2match;// 
+double Eg2match;//
 double PQ_eps_xy;//
 //*********
 
-//' Function for which we want to find roots 
-//' 
+//' Function for which we want to find roots
+//'
 //' Function used with function PQ_X_EgStrain tp find root,
 //' which would give us X Ga molar fraction
 //'
@@ -191,7 +192,7 @@ double PQ_eps_xy;//
 // [[Rcpp::export]]
 double func4root(double x) {
 	double	y=PQ_Y_XStrain(x,PQ_eps_xy);
-	return(PQ_Eg_XY(x,y)-Eg2match);		
+	return(PQ_Eg_XY(x,y)-Eg2match);
 }
 
 //used to define tolerance of root search with bisection algorithm
@@ -200,13 +201,13 @@ bool root_termination(double min, double max) {
 }
 
 //' Main function for Eg,Strain -> X,Y
-//' 
+//'
 //' Function sets 2 global variables Eg2match and PQ_eps_xy, which are then used by func4root.
 //' func4root is passed to bisect routine from Boost
 //'
 //' @param Eg bandgap in eV units
-//' 
-//' @param eps_xy in-plain strain in absolute units 
+//'
+//' @param eps_xy in-plain strain in absolute units
 //'
 //' @export
 // [[Rcpp::export]]
@@ -223,9 +224,9 @@ double PQ_X_EgStrain(double Eg, double eps_xy) {
 
 	std::pair<double, double> result = tools::bisect(func4root, 0.0, 1.0, root_termination);
 	return((result.first + result.second)/2);
-} 
+}
 
-//TODO Rcpp BH Bisection 
+//TODO Rcpp BH Bisection
 
 
 //' Convertsion of PL wavelength to bandgap in eV
@@ -260,5 +261,22 @@ double Eg2PL_f1(double Eg) {
 	return(1e9*h*c/Eg/q); // PL in nm
 }
 
-
+//' Finding X molar fraction from Y molar fraction and Strain
+//'
+//' Solving interpolation function from eq.1
+//' a0 lattice constant of compound calculated from strain, and given y molar fraction
+//' allows to find X molar fraction of compound.
+//' Usually used to find eg. lattice matched InGaAs composition Y=1, and strain=0
+//'
+//' @param  y As molar fraction
+//' @param strain Strain in absolute units
+//' @return double, x (Ga) molar fraction
+//' @export
+// [[Rcpp::export]]
+double PQ_X_YStrain(double y, double strain) {
+  double a0=LatticeConst(strain);
+  double nom = -a0_InAs*y + a0_InP*y + a0 - a0_InP;
+  double denom = a0_GaAs - a0_GaP*y - a0_InAs*y + a0_InP*y + a0_GaP - a0_InP;
+  return(nom/denom);
+}
 

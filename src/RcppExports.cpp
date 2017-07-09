@@ -109,6 +109,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// PQ_X_YStrain
+double PQ_X_YStrain(double y, double strain);
+RcppExport SEXP ingaasp2rcpp_PQ_X_YStrain(SEXP ySEXP, SEXP strainSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type y(ySEXP);
+    Rcpp::traits::input_parameter< double >::type strain(strainSEXP);
+    rcpp_result_gen = Rcpp::wrap(PQ_X_YStrain(y, strain));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"ingaasp2rcpp_eps_xy_f1", (DL_FUNC) &ingaasp2rcpp_eps_xy_f1, 2},
@@ -120,6 +132,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"ingaasp2rcpp_PQ_X_EgStrain", (DL_FUNC) &ingaasp2rcpp_PQ_X_EgStrain, 2},
     {"ingaasp2rcpp_PL2Eg_f1", (DL_FUNC) &ingaasp2rcpp_PL2Eg_f1, 1},
     {"ingaasp2rcpp_Eg2PL_f1", (DL_FUNC) &ingaasp2rcpp_Eg2PL_f1, 1},
+    {"ingaasp2rcpp_PQ_X_YStrain", (DL_FUNC) &ingaasp2rcpp_PQ_X_YStrain, 2},
     {NULL, NULL, 0}
 };
 
