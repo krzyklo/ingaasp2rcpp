@@ -5,15 +5,15 @@
 
 using namespace Rcpp;
 
-// eps_xy_f1
-double eps_xy_f1(double x, double y);
-RcppExport SEXP ingaasp2rcpp_eps_xy_f1(SEXP xSEXP, SEXP ySEXP) {
+// PQ_eps_xy_f1
+double PQ_eps_xy_f1(double x, double y);
+RcppExport SEXP ingaasp2rcpp_PQ_eps_xy_f1(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type x(xSEXP);
     Rcpp::traits::input_parameter< double >::type y(ySEXP);
-    rcpp_result_gen = Rcpp::wrap(eps_xy_f1(x, y));
+    rcpp_result_gen = Rcpp::wrap(PQ_eps_xy_f1(x, y));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -123,7 +123,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"ingaasp2rcpp_eps_xy_f1", (DL_FUNC) &ingaasp2rcpp_eps_xy_f1, 2},
+    {"ingaasp2rcpp_PQ_eps_xy_f1", (DL_FUNC) &ingaasp2rcpp_PQ_eps_xy_f1, 2},
     {"ingaasp2rcpp_PQ_Eg_unstrained", (DL_FUNC) &ingaasp2rcpp_PQ_Eg_unstrained, 2},
     {"ingaasp2rcpp_PQ_Eg_XY", (DL_FUNC) &ingaasp2rcpp_PQ_Eg_XY, 2},
     {"ingaasp2rcpp_LatticeConst", (DL_FUNC) &ingaasp2rcpp_LatticeConst, 1},

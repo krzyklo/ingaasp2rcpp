@@ -15,7 +15,7 @@ modPQ_PL2Eg<-function(PL) {
 #'@param y As molar fraction
 #'@export
 modPQ_EgStrain<-function(x,y) {
-  cbind(mapply( function(a, b) {ingaasp2rcpp::eps_xy_f1(a,b)}, x,y ),
+  cbind(mapply( function(a, b) {ingaasp2rcpp::PQ_eps_xy_f1(a,b)}, x,y ),
         mapply( function(a, b) {ingaasp2rcpp::PQ_Eg_XY(a,b)}, x,y ))
 }
 
@@ -36,7 +36,7 @@ modPQ_Eg_XY<-function(x,y) {
 #'@param y As molar fraction
 #'@export
 modPQ_eps_xy_f1<-function(x,y) {
-  mapply( function(a, b) {ingaasp2rcpp::eps_xy_f1(a,b)}, x, y)
+  mapply( function(a, b) {ingaasp2rcpp::PQ_eps_xy_f1(a,b)}, x, y)
 }
 
 #'Vectorized Eg from X and Y for InGaAsP

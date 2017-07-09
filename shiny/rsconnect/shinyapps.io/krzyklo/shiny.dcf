@@ -1,0 +1,11 @@
+name: shiny
+title: shiny
+account: krzyklo
+server: shinyapps.io
+appId: 195263
+bundleId: 897072
+url: https://krzyklo.shinyapps.io/shiny/
+when: 1499609773.97658
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: figure/unnamed-chunk-1-1.png|figure/unnamed-chunk-2-1.png|figure/unnamed-chunk-3-1.png

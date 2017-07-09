@@ -10,8 +10,8 @@
 #' @param y As molar fraction
 #'
 #'@export
-eps_xy_f1 <- function(x, y) {
-    .Call('ingaasp2rcpp_eps_xy_f1', PACKAGE = 'ingaasp2rcpp', x, y)
+PQ_eps_xy_f1 <- function(x, y) {
+    .Call('ingaasp2rcpp_PQ_eps_xy_f1', PACKAGE = 'ingaasp2rcpp', x, y)
 }
 
 #' Unstrained bandgap Eg in eV from polynomial eq.3

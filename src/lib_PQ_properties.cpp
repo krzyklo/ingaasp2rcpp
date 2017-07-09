@@ -19,7 +19,7 @@ namespace tools = boost::math::tools;
 //'
 //'@export
 // [[Rcpp::export]]
-double eps_xy_f1 (double x,double y);
+double PQ_eps_xy_f1 (double x,double y);
 double PQ_interp_a0 (double x,double y);
 double PQ_interp_c11 (double x,double y);
 double PQ_interp_c12 (double x,double y);
@@ -30,27 +30,27 @@ double PQ_Eclh_f1 (double x,double y);
 double PQ_Echh_f1 (double x,double y);
 
 
-double eps_xy_f1(double x, double y) {
+double PQ_eps_xy_f1(double x, double y) {
 	return( (a0_InP - PQ_interp_a0(x,y) ) / PQ_interp_a0(x,y));
 }
 
 double eps_z(double x, double y) {
-	return(-2*PQ_interp_c12(x,y)/PQ_interp_c11(x,y) * eps_xy_f1(x,y) );
+	return(-2*PQ_interp_c12(x,y)/PQ_interp_c11(x,y) * PQ_eps_xy_f1(x,y) );
 }
 
 double dEc_f1(double x, double y) {
-	return ( PQ_interp_ac(x,y) * ( 2 * eps_xy_f1(x,y) + eps_z(x,y) ));
+	return ( PQ_interp_ac(x,y) * ( 2 * PQ_eps_xy_f1(x,y) + eps_z(x,y) ));
 }
 
 double Peps_f1(double x, double y) {
-	return( -2*PQ_interp_av(x,y) * (1 - PQ_interp_c12(x,y) / PQ_interp_c11(x,y)) * eps_xy_f1(x,y) );
+	return( -2*PQ_interp_av(x,y) * (1 - PQ_interp_c12(x,y) / PQ_interp_c11(x,y)) * PQ_eps_xy_f1(x,y) );
 }
 
 // eq. 12
 // @param x Ga molar fraction
 // @param y As molar fraction
 double Qeps_f1(double x, double y) {
-	return(-PQ_interp_b(x,y)*(1+2*PQ_interp_c12(x,y)/PQ_interp_c11(x,y) ) * eps_xy_f1(x,y) );
+	return(-PQ_interp_b(x,y)*(1+2*PQ_interp_c12(x,y)/PQ_interp_c11(x,y) ) * PQ_eps_xy_f1(x,y) );
 }
 
 // @param x Ga molar fraction

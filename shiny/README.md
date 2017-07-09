@@ -37,7 +37,7 @@ Type the commands below in R or RStudio:
 
 The package location on GitHub: <https://github.com/krzyklo/ingaasp2rcpp>.
 
-### Figures
+### Figures - comparison with reference paper
 The figures below shows digitized data (circles) and **InGaAsP calculator** results (lines) for $Eg,Strain <-> x,y$ transformations in both directions. As we could see below the model accurately reproduces the data from the figures in reference paper. 
 
 ![Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. With circles data reproduced from Fig. 1 b) of the reference paper](figure/unnamed-chunk-1-1.png)
@@ -61,8 +61,8 @@ round(PQ_Eg_XY(x,1),digits = 2)
 ![Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper](figure/unnamed-chunk-3-1.png)
 
 
-In the plot above we could see, two types of x and y relation. First for the cases where strain was fixed, and Eg was varied. The second where Eg was fixed, and strain varied. It need to be noted, that this plot is less straightforward to generate, as not all combinations of Eg and strain values have physical meaning (x and y values smaller than 1).
-An example is Eg=0.7eV, and 0 strain. This pair is leading to y composition larger than 1.
+In the plot above two types of x and y relation are shown. Firstly, for the cases where strain was fixed, and Eg was varied. The second, where Eg was fixed, and strain varied. Plot of X, and Y molar fractions as function of Eg, and strain is less straightforward to generate, as not all combinations of Eg and strain values have physical meaning (x and y values smaller than 1), and root finding technique need to be employed (bisection).
+An example of unphysical result is Eg=0.7eV, and 0 strain. This pair is leading to y composition larger than 1.
 
 ```r
 round(modPQ_XY_EgStrain(0.7,0),3)
@@ -73,7 +73,47 @@ round(modPQ_XY_EgStrain(0.7,0),3)
 ## [1,] 0.505 1.076
 ```
 
-Constant strain lead to linear dependence between x and y molar fractions. In the plot 0% strain is shown with blue color, whereas -0.5% strain with red and 0.5% with orange. 
+Constant strain lead to linear dependence between x and y molar fractions. In the plot 0% strain is shown with blue color, whereas -0.5% and 0.5% strain with red and orange respectively. 
 
+### Information about Objects and Functions
+
+The naming convention used in this package is that all functions exported for user are starting with PQ or modPQ prefix, with a few exceptions. PQ functions are not vectorized, user should work with modPQ functions which are vectorized. After prefix, there is underscore and return variable(s), followed by second underscore with input arguments.  
+For example `modPQ_X_EgStrain` means that function will return x (Ga molar fraction), and take bandgap Eg and Strain in absolute units as input arguments.
+
+After installation please type `library(help="ingaasp2rcpp")` to see all the objects from the package with brief description. 
+Below is the list of functions, and their arguments: 
+
+
+```r
+lsf.str("package:ingaasp2rcpp")
+```
+
+```
+## Eg2PL_f1 : function (Eg)  
+## func4root : function (x)  
+## LatticeConst : function (eps_xy)  
+## modPQ_EgStrain : function (x, y)  
+## modPQ_Eg_XY : function (x, y)  
+## modPQ_eps_xy_f1 : function (x, y)  
+## modPQ_PL2Eg : function (PL)  
+## modPQ_X_EgStrain : function (Eg, Strain)  
+## modPQ_XY_EgStrain : function (Eg, Strain)  
+## modPQ_Y_EgStrain : function (x, Strain)  
+## PL2Eg_f1 : function (PL)  
+## PQ_Eg_unstrained : function (x, y)  
+## PQ_Eg_XY : function (x, y)  
+## PQ_eps_xy_f1 : function (x, y)  
+## PQ_X_EgStrain : function (Eg, eps_xy)  
+## PQ_X_YStrain : function (y, strain)  
+## PQ_Y_XStrain : function (x, eps_xy)
+```
+
+
+### Typical usage 
+
+Typically, engineer 
+
+
+### InGaAsP Calculator in web browser
 
 

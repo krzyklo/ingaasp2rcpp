@@ -8,13 +8,13 @@ library(ingaasp2rcpp)
 rmdfiles <- c("README.Rmd")
 sapply(rmdfiles, knit, quiet = T)
 
-navbarPage(title=HTML("<a id=\"title\", style=color:black;  href=\"#InGaAsP\">Reproducible Research</a>"),theme = "bootstrap.css",
+navbarPage(title=HTML("<a id=\"title\", style=color:black;  href=\"#Readme\">Reproducible Research</a>"),theme = "bootstrap.css",
            tabPanel("InGaAsP",
                     sidebarLayout(
                       navlistPanel(
                         "InGaAsP",widths = c(2,10),
-                        tabPanel("Intro",
-                                 h4("Intro"),
+                        tabPanel("Readme",
+                                 h4("Readme"),
                                  withMathJax(includeMarkdown("README.md"))
 
                         ),
