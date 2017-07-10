@@ -98,6 +98,6 @@ function(input, output, session) {
     cnst
   })
 
-
+  session$onSessionEnded(stopApp)
 }
 

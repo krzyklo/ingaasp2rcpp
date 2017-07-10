@@ -127,7 +127,7 @@ $(document).ready(function () {
 <div id="intro" class="section level3">
 <h3>Intro</h3>
 <p>This is the R package which ties model of bandgap(Eg) and strain vs x (Ga) and Y(As) molar fractions in InGaAsP material. The model is based on paper:<br />
-<strong>J. Minch, S.H. Park, T. Keating, and S.L. Chuang: “Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers” from Journal of Quantum Electronic vol 35, NO. 5, May 1999</strong></p>
+<strong>J. Minch, S.H. Park, T. Keating, and S.L. Chuang: “Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers” from Journal of Quantum Electronics vol 35, NO. 5, May 1999</strong></p>
 <p>The model allows to transform Eg, Strain into molar fractions x(Ga), and y(As) and back:<br />
 <span class="math inline">\(Eg,Strain &lt;--&gt; x,y\)</span></p>
 <p>The intention behind this was to exercise good coding practices in R:</p>
@@ -147,6 +147,11 @@ $(document).ready(function () {
 <p><code>install.packages(&quot;devtools&quot;)</code></p>
 <p><code>devtools::install_github(&quot;krzyklo/ingaasp2rcpp&quot;)</code></p>
 <p>The package location on GitHub: <a href="https://github.com/krzyklo/ingaasp2rcpp" class="uri">https://github.com/krzyklo/ingaasp2rcpp</a>.</p>
+</div>
+<div id="ingaasp-calculator-in-web-browser" class="section level3">
+<h3>InGaAsP Calculator in web browser</h3>
+<p>InGaAsP calculator as simple web application written in Shiny - web application framework for R:</p>
+<p><a href="https://krzyklo.shinyapps.io/ingaasp/" class="uri">https://krzyklo.shinyapps.io/ingaasp/</a></p>
 </div>
 <div id="figures---comparison-with-reference-paper" class="section level3">
 <h3>Figures - comparison with reference paper</h3>
@@ -198,10 +203,15 @@ For example <code>modPQ_X_EgStrain</code> means that function will return x (Ga 
 </div>
 <div id="typical-usage" class="section level3">
 <h3>Typical usage</h3>
-<p>Typically, engineer</p>
-</div>
-<div id="ingaasp-calculator-in-web-browser" class="section level3">
-<h3>InGaAsP Calculator in web browser</h3>
+<p>Calculate what target composition have InGaAsP layer with given PL and target, eg. PL=1200nm, strain=0%:</p>
+<pre class="r"><code>modPQ_XY_EgStrain(modPQ_PL2Eg(1200),0)</code></pre>
+<pre><code>##              X         Y
+## [1,] 0.2006707 0.4366245</code></pre>
+<p>Calculate composition of the outcome of growth eg. PL=1220nm, strain=500 ppm:</p>
+<pre class="r"><code>modPQ_XY_EgStrain(modPQ_PL2Eg(1220),500/1e6)</code></pre>
+<pre><code>##              X         Y
+## [1,] 0.2210441 0.4650469</code></pre>
+<p>Then growth model is used to modify reagents flow, to obtain outcome closer to target.</p>
 </div>
 
 

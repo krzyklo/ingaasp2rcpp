@@ -8,7 +8,7 @@ library(ingaasp2rcpp)
 rmdfiles <- c("README.Rmd")
 sapply(rmdfiles, knit, quiet = T)
 
-navbarPage(title=HTML("<a id=\"title\", style=color:black;  href=\"#Readme\">Reproducible Research</a>"),theme = "bootstrap.css",
+navbarPage(title="Reproducible Research",theme = "bootstrap.css",
            tabPanel("InGaAsP",
                     sidebarLayout(
                       navlistPanel(
@@ -46,7 +46,12 @@ navbarPage(title=HTML("<a id=\"title\", style=color:black;  href=\"#Readme\">Rep
                                  )
                         ),
                         tabPanel("ToDo",
-                                 p("This is the third panel")
+                                 h4("Ideas for more work"),
+                                 p("- Quantum Wells models and calculations"),
+                                 p("- Adding InGaAsP growth model in MOCVD"),
+                                 p("- Laser gratings calculations"),
+                                 p("- post modifications of V. Łysak(IOFFE) model for gain calculations in semiconductors as in this example:"),
+                                 a(href="http://www.nlcstr.com/examples2.htm","examples for comparison")
                                  #includeMarkdown("InGaAsP_1.md"),
 
                         )
@@ -60,29 +65,13 @@ navbarPage(title=HTML("<a id=\"title\", style=color:black;  href=\"#Readme\">Rep
                     h5("The table below shows constants used in the InGaAsP material calculator model"),
                     verbatimTextOutput("constants")
            ),
-           navbarMenu("More",
-                      tabPanel("Table",h3("TBD")
-                               #         DT::dataTableOutput("table")
-                      ),
-                      tabPanel("About",
-                               fluidRow(
-                                 column(6, includeMarkdown("about.md")
-                                 ),
-                                 column(3,
-                                        img(class="img-polaroid",
-                                            src=paste0("http://upload.wikimedia.org/",
-                                                       "wikipedia/commons/9/92/",
-                                                       "1919_Ford_Model_T_Highboy_Coupe.jpg")),
-                                        tags$small(
-                                          "Source: Photographed at the Bay State Antique ",
-                                          "Automobile Club's July 10, 2005 show at the ",
-                                          "Endicott Estate in Dedham, MA by ",
-                                          a(href="http://commons.wikimedia.org/wiki/User:Sfoskett",
-                                            "User:Sfoskett")
-                                        )
-                                 )
-                               )
+           #navbarMenu("More",
+           tabPanel("About",
+                    fluidRow(
+                      column(6, includeMarkdown("about.md")
                       )
+                    )
            )
+           #)
 )
 

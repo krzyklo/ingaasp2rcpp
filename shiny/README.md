@@ -13,7 +13,7 @@ output:
 
 ### Intro
 This is the R package which ties model of bandgap(Eg) and strain vs x (Ga) and Y(As) molar fractions  in InGaAsP material. The model is based on paper:  
-**J. Minch, S.H. Park, T. Keating, and S.L. Chuang: "Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers" from Journal of Quantum Electronic vol 35, NO. 5, May 1999**
+**J. Minch, S.H. Park, T. Keating, and S.L. Chuang: "Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers" from Journal of Quantum Electronics vol 35, NO. 5, May 1999**
 
 The model allows to transform Eg, Strain into molar fractions x(Ga), and y(As) and back:  
 $Eg,Strain <--> x,y$  
@@ -36,6 +36,12 @@ Type the commands below in R or RStudio:
 `devtools::install_github("krzyklo/ingaasp2rcpp")`
 
 The package location on GitHub: <https://github.com/krzyklo/ingaasp2rcpp>.
+
+### InGaAsP Calculator in web browser
+InGaAsP calculator as simple web application written in Shiny - web application framework for R:  
+
+<https://krzyklo.shinyapps.io/ingaasp/>
+
 
 ### Figures - comparison with reference paper
 The figures below shows digitized data (circles) and **InGaAsP calculator** results (lines) for $Eg,Strain <-> x,y$ transformations in both directions. As we could see below the model accurately reproduces the data from the figures in reference paper. 
@@ -111,9 +117,28 @@ lsf.str("package:ingaasp2rcpp")
 
 ### Typical usage 
 
-Typically, engineer 
+Calculate what target composition have InGaAsP layer with given PL and target, eg. PL=1200nm, strain=0%:  
 
+```r
+modPQ_XY_EgStrain(modPQ_PL2Eg(1200),0)
+```
 
-### InGaAsP Calculator in web browser
+```
+##              X         Y
+## [1,] 0.2006707 0.4366245
+```
+
+Calculate composition of the outcome of growth eg. PL=1220nm, strain=500 ppm:
+
+```r
+modPQ_XY_EgStrain(modPQ_PL2Eg(1220),500/1e6)
+```
+
+```
+##              X         Y
+## [1,] 0.2210441 0.4650469
+```
+
+Then growth model is used to modify reagents flow, to obtain outcome closer to target. 
 
 

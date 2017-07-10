@@ -1,0 +1,11 @@
+name: ingaasp
+title: InGaAsP
+account: krzyklo
+server: shinyapps.io
+appId: 195510
+bundleId: 897825
+url: https://krzyklo.shinyapps.io/ingaasp/
+when: 1499674936.66279
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: figure/unnamed-chunk-1-1.png|figure/unnamed-chunk-2-1.png|figure/unnamed-chunk-3-1.png
