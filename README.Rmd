@@ -12,7 +12,7 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+[![DOI](https://zenodo.org/badge/96256606.svg)](https://zenodo.org/badge/latestdoi/96256606)
 [![Build Status](https://travis-ci.org/krzyklo/ingaasp2rcpp.svg?branch=master)](https://travis-ci.org/krzyklo/ingaasp2rcpp)
 
 ### Intro

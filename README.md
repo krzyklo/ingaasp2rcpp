@@ -3,7 +3,7 @@ Krzysztof Kłos
 July 5, 2017  
 
 
-
+[![DOI](https://zenodo.org/badge/96256606.svg)](https://zenodo.org/badge/latestdoi/96256606)
 [![Build Status](https://travis-ci.org/krzyklo/ingaasp2rcpp.svg?branch=master)](https://travis-ci.org/krzyklo/ingaasp2rcpp)
 
 ### Intro
