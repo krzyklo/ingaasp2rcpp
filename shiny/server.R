@@ -8,7 +8,7 @@ data("fig1b")
 data("fig1a")
 
 
-indf<-data.frame(x=c(0),y=c(0))
+indf<-data.frame(x=c(0),y=c(0),PL=c(Eg2PL_f1(modPQ_Eg_XY(0,0))),strain=c(modPQ_eps_xy_f1(0,0)*1e6))
 
 function(input, output, session) {
 
@@ -18,7 +18,7 @@ function(input, output, session) {
 
   observe({
     if(input$AddButton>0) {
-      newLine<-isolate(c(input$Ga_x,input$As_y))
+      newLine<-isolate(c(input$Ga_x,input$As_y,Eg2PL_f1(modPQ_Eg_XY(input$Ga_x,input$As_y)),modPQ_eps_xy_f1(input$Ga_x,input$As_y)*1e6))
       isolate(values$df<-rbind(values$df,newLine))
     }
   })

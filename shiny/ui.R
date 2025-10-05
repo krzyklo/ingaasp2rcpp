@@ -8,7 +8,7 @@ library(ingaasp2rcpp)
 rmdfiles <- c("README.Rmd")
 sapply(rmdfiles, knit, quiet = T)
 
-navbarPage(title="Reproducible Research",theme = "bootstrap.css",
+navbarPage(title="www.photin.eu",theme = "bootstrap.css",
            tabPanel("InGaAsP",
                     sidebarLayout(
                       navlistPanel(
@@ -22,16 +22,22 @@ navbarPage(title="Reproducible Research",theme = "bootstrap.css",
                                  fluidRow(
                                    column(4,
                                           h4("InGaAsP Calculator"),
+                                          h4("To order InP/InGaAs/InGaAsP wafer visit: www.photin.eu"),
                                           fluidRow(column(2,h6("x(Ga)")), column(2,h6("y(As)"))),
                                           fluidRow(
                                             column(width=4,numericInput("Ga_x",label = NULL, 0.1,min = 0,max=1,value = 0)),
                                             column(width=4,numericInput("As_y",label = NULL, 0.1,min = 0,max=1, value = 0 )),
-                                            column(1,actionButton("AddButton",label="Add",icon("floppy-o", lib = "font-awesome")))
+                                            column(1,actionButton("AddButton",label="Add",icon("floppy-o", lib = "font-awesome"))),
+                                            column(1,offset=8,actionButton("CutLast",label="Cut",icon("cut", lib = "font-awesome")))
                                           ),
                                           fluidRow(
-                                            column(1,tableOutput("table")),
                                             tags$br(),
-                                            column(1,offset=4,actionButton("CutLast",label="Cut",icon("cut", lib = "font-awesome"))))
+                                            tags$p('    x,    y,    PL [nm],    Strain [ppm]'),
+                                            column(1,tableOutput("table")),
+                                            tags$br()
+                                          )
+
+
                                    ),
                                    column(width=7,plotOutput("plot"),plotOutput("plot1"))
 
@@ -69,6 +75,7 @@ navbarPage(title="Reproducible Research",theme = "bootstrap.css",
            tabPanel("About",
                     fluidRow(
                       column(6, includeMarkdown("about.md")
+
                       )
                     )
            )
