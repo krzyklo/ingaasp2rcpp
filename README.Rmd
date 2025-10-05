@@ -1,7 +1,7 @@
 ---
 title: "README"
 author: "Krzysztof Kłos"
-date: "July 5, 2017"
+date: "5th of Oct 2025"
 output:
   html_document:
     keep_md: yes
@@ -16,8 +16,11 @@ knitr::opts_chunk$set(echo = TRUE)
 [![Build Status](https://travis-ci.org/krzyklo/ingaasp2rcpp.svg?branch=master)](https://travis-ci.org/krzyklo/ingaasp2rcpp)
 
 ### Intro
-To grow epitaxial layers of InGaAs and InGaAsP on InP substrates, knowledge about relation between composition and bandgap/mismatch in necessary. **The company www.photin.eu developed this calculators, to help our customers, and establish common platform for discussions about material properties.  **
+To grow epitaxial layers of InGaAs and InGaAsP on InP substrates, knowledge about relation between composition and bandgap/mismatch in necessary.  
+
+**The company https://www.photin.eu developed this calculators, to help our customers, and establish common platform for discussions about material properties.**  
 **Please contact info[&]photin.eu if you would like to purchase epitaxial wafer with InP/InGaAs/InGaAsP structure.**    
+
 This is the R package which ties model of bandgap(Eg) and strain vs x (Ga) and Y(As) molar fractions  in InGaAsP material. The model is based on paper:  
 **J. Minch, S.H. Park, T. Keating, and S.L. Chuang: "Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers" from Journal of Quantum Electronics vol 35, NO. 5, May 1999**
 
