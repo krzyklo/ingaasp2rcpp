@@ -1,10 +1,12 @@
 ---
 title: "README"
 author: "Krzysztof Kłos"
-date: "July 5, 2017"
-output: 
-  html_document: 
+date: "5th of Oct 2025"
+output:
+  html_document:
     keep_md: yes
+  pdf_document:
+    latex_engine: lualatex
 ---
 
 
@@ -12,6 +14,11 @@ output:
 [![Build Status](https://travis-ci.org/krzyklo/ingaasp2rcpp.svg?branch=master)](https://travis-ci.org/krzyklo/ingaasp2rcpp)
 
 ### Intro
+To grow epitaxial layers of InGaAs and InGaAsP on InP substrates, knowledge about relation between composition and bandgap/mismatch in necessary.  
+
+**The company https://www.photin.eu developed this calculators, to help our customers, and establish common platform for discussions about material properties.**  
+**Please contact info[&]photin.eu if you would like to purchase epitaxial wafer with InP/InGaAs/InGaAsP structure.**    
+
 This is the R package which ties model of bandgap(Eg) and strain vs x (Ga) and Y(As) molar fractions  in InGaAsP material. The model is based on paper:  
 **J. Minch, S.H. Park, T. Keating, and S.L. Chuang: "Theory and Experiment if InGaAsP and AlInGaAs Long Wavelength Strained Quantum-Well Lasers" from Journal of Quantum Electronics vol 35, NO. 5, May 1999**
 
@@ -46,7 +53,7 @@ InGaAsP calculator as simple web application written in Shiny - web application 
 ### Figures - comparison with reference paper
 The figures below shows digitized data (circles) and **InGaAsP calculator** results (lines) for $Eg,Strain <-> x,y$ transformations in both directions. As we could see below the model accurately reproduces the data from the figures in reference paper. 
 
-![Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. With circles data reproduced from Fig. 1 b) of the reference paper](figure/unnamed-chunk-1-1.png)
+![Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. With circles data reproduced from Fig. 1 b) of the reference paper](README_files/figure-html/unnamed-chunk-1-1.png)
 
 The plot above shows the relation between bandgap Eg and strain of various InGaAsP composition variants. 
 It was created by fixing x or y molar fractions, and then vary the other molar fraction between 0 and 1.
@@ -64,7 +71,7 @@ round(PQ_Eg_XY(x,1),digits = 2)
 ## [1] 0.73
 ```
 
-![Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper](figure/unnamed-chunk-3-1.png)
+![Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper](README_files/figure-html/unnamed-chunk-3-1.png)
 
 
 In the plot above two types of x and y relation are shown. Firstly, for the cases where strain was fixed, and Eg was varied. The second, where Eg was fixed, and strain varied. Plot of X, and Y molar fractions as function of Eg, and strain is less straightforward to generate, as not all combinations of Eg and strain values have physical meaning (x and y values smaller than 1), and root finding technique need to be employed (bisection).
@@ -98,8 +105,8 @@ lsf.str("package:ingaasp2rcpp")
 ## Eg2PL_f1 : function (Eg)  
 ## func4root : function (x)  
 ## LatticeConst : function (eps_xy)  
-## modPQ_EgStrain : function (x, y)  
 ## modPQ_Eg_XY : function (x, y)  
+## modPQ_EgStrain : function (x, y)  
 ## modPQ_eps_xy_f1 : function (x, y)  
 ## modPQ_PL2Eg : function (PL)  
 ## modPQ_X_EgStrain : function (Eg, Strain)  
