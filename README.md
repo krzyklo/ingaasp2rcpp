@@ -61,7 +61,7 @@ both directions. As we could see below the model accurately reproduces
 the data from the figures in reference paper.
 
 <figure>
-<img src="README_files/figure-gfm/unnamed-chunk-1-1.png"
+<img src="README_files/unnamed-chunk-1-1.png"
 alt="Fig. 1. Calculation of bandgap Eg and Strain from molar fractions X and Y. With circles data reproduced from Fig. 1 b) of the reference paper" />
 <figcaption aria-hidden="true">Fig. 1. Calculation of bandgap Eg and
 Strain from molar fractions X and Y. With circles data reproduced from
@@ -94,7 +94,7 @@ round(PQ_Eg_XY(x,1),digits = 2)
     ## [1] 0.73
 
 <figure>
-<img src="README_files/figure-gfm/unnamed-chunk-3-1.png"
+<img src="README_files/unnamed-chunk-3-1.png"
 alt="Fig. 2. As molar fraction vs Ga molar fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of the reference paper" />
 <figcaption aria-hidden="true">Fig. 2. As molar fraction vs Ga molar
 fraction for constant strain and bandgap. Reproduced from Fig. 1 a) of
